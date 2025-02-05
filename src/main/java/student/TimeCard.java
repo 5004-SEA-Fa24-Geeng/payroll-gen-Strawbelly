@@ -1,6 +1,6 @@
 package student;
 
-public class TimeCard implements ITimeCard{
+public class TimeCard implements ITimeCard {
 
     /** holds the id.*/
     private String id;
@@ -19,7 +19,7 @@ public class TimeCard implements ITimeCard{
     }
 
     /**
-     * Return the id of the employee
+     * Return the id of the employee.
      * @return the id of the employee
      */
     @Override
@@ -28,7 +28,7 @@ public class TimeCard implements ITimeCard{
     }
 
     /**
-     * Return the work hours of the employee
+     * Return the work hours of the employee.
      * @return the work hours of the employee
      */
     @Override

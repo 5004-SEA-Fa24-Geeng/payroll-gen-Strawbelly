@@ -1,8 +1,5 @@
 package student;
 
-import java.util.Enumeration;
-import java.util.List;
-
 /**
  * This is a static class (essentially functions) that will help you build objects from CSV strings.
  * These objects are then used in the rest of the program. Often these builders are associated
@@ -35,16 +32,17 @@ public final class Builder {
         double ytdEarnings = Double.parseDouble(em[5]);
         double ytdTaxesPaid = Double.parseDouble(em[6]);
 
+        IEmployee employee = null;
+
         if (type.name().equals("HOURLY")) {
-            HourlyEmployee employee = new HourlyEmployee(name, id, payRate, ytdEarnings, ytdTaxesPaid, pretaxDeductions);
-            employee.setType(type);
-            return employee;
+            employee = new HourlyEmployee(name, id, payRate, ytdEarnings,
+                    ytdTaxesPaid, pretaxDeductions);
         } else if (type.name().equals("SALARY")) {
-            SalaryEmployee employee = new SalaryEmployee(name, id, payRate, ytdEarnings, ytdTaxesPaid, pretaxDeductions);
-            employee.setType(type);
-            return employee;
+            employee = new SalaryEmployee(name, id, payRate, ytdEarnings,
+                    ytdTaxesPaid, pretaxDeductions);
         }
-        return null;
+
+        return employee;
     }
 
 

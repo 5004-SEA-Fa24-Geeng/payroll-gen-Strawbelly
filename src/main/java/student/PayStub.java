@@ -1,6 +1,6 @@
 package student;
 
-public class PayStub implements IPayStub{
+public class PayStub implements IPayStub {
 
     /** holds the name.*/
     private String name;

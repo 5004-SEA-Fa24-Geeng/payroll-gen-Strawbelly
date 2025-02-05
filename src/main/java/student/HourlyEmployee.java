@@ -1,5 +1,4 @@
 package student;
-
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
@@ -12,7 +11,7 @@ public class HourlyEmployee extends EmployeeGrossPay implements IEmployee {
     private String id;
 
     /** holds the name.*/
-    private EmployeeType type;
+    private EmployeeType type = EmployeeType.HOURLY;
 
     /** holds the pay rate.*/
     private double payRate;
@@ -41,7 +40,8 @@ public class HourlyEmployee extends EmployeeGrossPay implements IEmployee {
      * @param ytdTaxesPaid the ytd taxes paid of the hourly employee
      * @param pretaxDeductions the pre-tax deductions of the hourly employee
      */
-    public HourlyEmployee(String name, String id, double payRate, double ytdEarnings, double ytdTaxesPaid, double pretaxDeductions) {
+    public HourlyEmployee(String name, String id, double payRate, double ytdEarnings,
+                          double ytdTaxesPaid, double pretaxDeductions) {
         this.name = name;
         this.id = id;
         this.payRate = payRate;
@@ -176,7 +176,7 @@ public class HourlyEmployee extends EmployeeGrossPay implements IEmployee {
      */
     @Override
     public IPayStub runPayroll(double hoursWorked) {
-        if(hoursWorked < 0) {
+        if (hoursWorked < 0) {
             return null;
         }
         BigDecimal grossPay = calculateGrossPay(hoursWorked);
@@ -209,13 +209,14 @@ public class HourlyEmployee extends EmployeeGrossPay implements IEmployee {
      */
     @Override
     protected BigDecimal calculateGrossPay(double hoursWorked) {
-        BigDecimal BDPayRate = BigDecimal.valueOf(payRate);
-        BigDecimal BDHoursWorked = BigDecimal.valueOf(hoursWorked);
+        BigDecimal payRateBD = BigDecimal.valueOf(payRate);
+        BigDecimal hoursWorkedBD = BigDecimal.valueOf(hoursWorked);
         if (hoursWorked <= WORK_HOURS) {
-            return BDPayRate.multiply(BDHoursWorked);
+            return payRateBD.multiply(hoursWorkedBD);
         } else {
-            BigDecimal basePay = BDPayRate.multiply(BigDecimal.valueOf(WORK_HOURS));
-            BigDecimal overtimePay = BDPayRate.multiply(BigDecimal.valueOf(1.5)).multiply(BigDecimal.valueOf(hoursWorked - WORK_HOURS));
+            BigDecimal basePay = payRateBD.multiply(BigDecimal.valueOf(WORK_HOURS));
+            BigDecimal overtimePay = payRateBD.multiply(BigDecimal.valueOf(1.5))
+                    .multiply(BigDecimal.valueOf(hoursWorked - WORK_HOURS));
             return basePay.add(overtimePay);
         }
     }

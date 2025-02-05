@@ -3,7 +3,7 @@ package student;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-public class SalaryEmployee extends EmployeeGrossPay implements IEmployee{
+public class SalaryEmployee extends EmployeeGrossPay implements IEmployee {
 
     /** holds the name.*/
     private String name;
@@ -12,7 +12,7 @@ public class SalaryEmployee extends EmployeeGrossPay implements IEmployee{
     private String id;
 
     /** holds the name.*/
-    private EmployeeType type;
+    private EmployeeType type = EmployeeType.SALARY;
 
     /** holds the pay rate.*/
     private double payRate;
@@ -41,7 +41,8 @@ public class SalaryEmployee extends EmployeeGrossPay implements IEmployee{
      * @param ytdTaxesPaid the ytd taxes paid of the hourly employee
      * @param pretaxDeductions the pre-tax deductions of the hourly employee
      */
-    public SalaryEmployee(String name, String id, double payRate, double ytdEarnings, double ytdTaxesPaid, double pretaxDeductions) {
+    public SalaryEmployee(String name, String id, double payRate, double ytdEarnings,
+                          double ytdTaxesPaid, double pretaxDeductions) {
         this.name = name;
         this.id = id;
         this.payRate = payRate;
@@ -199,17 +200,18 @@ public class SalaryEmployee extends EmployeeGrossPay implements IEmployee{
      */
     @Override
     public String toCSV() {
-        return getEmployeeType() + "," + name + "," + id + "," + payRate + "," + pretaxDeductions + "," + ytdEarnings + "," + ytdTaxesPaid;
+        return getEmployeeType() + "," + name + "," + id + "," + payRate + "," +
+                pretaxDeductions + "," + ytdEarnings + "," + ytdTaxesPaid;
     }
 
     /**
-     * Calculate the gross pay for the salary employee
+     * Calculate the gross pay for the salary employee.
      * @param hoursWorked the work hours of the salary employee
      * @return the gross pay as a BigDecimal
      */
     @Override
     protected BigDecimal calculateGrossPay(double hoursWorked) {
-        BigDecimal BDPayRate = BigDecimal.valueOf(payRate);
-        return BDPayRate.multiply(BigDecimal.valueOf(1.0 / TIMES));
+        BigDecimal payRateBD = BigDecimal.valueOf(payRate);
+        return payRateBD.multiply(BigDecimal.valueOf(1.0 / TIMES));
     }
 }
