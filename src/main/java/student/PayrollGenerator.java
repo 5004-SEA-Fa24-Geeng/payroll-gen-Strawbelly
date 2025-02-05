@@ -79,6 +79,7 @@ public final class PayrollGenerator {
             if (hours == 0) {
                 IPayStub payStub = new PayStub(employee.getName(), 0, 0,
                         employee.getYTDEarnings(), employee.getYTDTaxesPaid());
+                payStubs.add(payStub);
             } else {
                 IPayStub payStub = employee.runPayroll(timeCard.getHoursWorked());
                 if (payStub != null) {

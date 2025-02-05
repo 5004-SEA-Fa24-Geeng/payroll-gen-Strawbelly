@@ -24,7 +24,7 @@ public final class Builder {
     public static IEmployee buildEmployeeFromCSV(String csv) {
 
         String[] em = csv.split(",");
-        EmployeeType type = EmployeeType.valueOf(em[0]);
+        String type = em[0];
         String name = em[1];
         String id = em[2];
         double payRate = Double.parseDouble(em[3]);
@@ -34,10 +34,10 @@ public final class Builder {
 
         IEmployee employee = null;
 
-        if (type.name().equals("HOURLY")) {
+        if (type.equals("HOURLY")) {
             employee = new HourlyEmployee(name, id, payRate, ytdEarnings,
                     ytdTaxesPaid, pretaxDeductions);
-        } else if (type.name().equals("SALARY")) {
+        } else if (type.equals("SALARY")) {
             employee = new SalaryEmployee(name, id, payRate, ytdEarnings,
                     ytdTaxesPaid, pretaxDeductions);
         }
