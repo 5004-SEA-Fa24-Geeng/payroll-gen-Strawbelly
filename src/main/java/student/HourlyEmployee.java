@@ -1,4 +1,5 @@
 package student;
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
@@ -199,7 +200,8 @@ public class HourlyEmployee extends EmployeeGrossPay implements IEmployee {
      */
     @Override
     public String toCSV() {
-        return getEmployeeType() + "," + name + "," + id + "," + payRate + "," + pretaxDeductions + "," + ytdEarnings + "," + ytdTaxesPaid;
+        return getEmployeeType() + "," + name + "," + id + "," + payRate + "," +
+                pretaxDeductions + "," + ytdEarnings + "," + ytdTaxesPaid;
     }
 
     /**
