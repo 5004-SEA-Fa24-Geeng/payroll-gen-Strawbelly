@@ -1,7 +1,6 @@
 package student;
 
 import java.math.BigDecimal;
-import java.math.MathContext;
 import java.math.RoundingMode;
 
 public class SalaryEmployee extends EmployeeGrossPay implements IEmployee {
@@ -213,6 +212,6 @@ public class SalaryEmployee extends EmployeeGrossPay implements IEmployee {
     @Override
     protected BigDecimal calculateGrossPay(double hoursWorked) {
         BigDecimal payRateBD = BigDecimal.valueOf(payRate);
-        return payRateBD.divide(BigDecimal.valueOf(TIMES), new MathContext(4));
+        return payRateBD.multiply(BigDecimal.valueOf(1.0 / TIMES));
     }
 }
