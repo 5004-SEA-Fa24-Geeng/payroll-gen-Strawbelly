@@ -35,15 +35,16 @@ public final class Builder {
         double ytdEarnings = Double.parseDouble(em[5]);
         double ytdTaxesPaid = Double.parseDouble(em[6]);
 
-        IEmployee employee = null;
-
         if (type.name().equals("HOURLY")) {
-            employee = new HourlyEmployee(name, id, type, payRate, ytdEarnings, ytdTaxesPaid, pretaxDeductions);
+            HourlyEmployee employee = new HourlyEmployee(name, id, payRate, ytdEarnings, ytdTaxesPaid, pretaxDeductions);
+            employee.setType(type);
+            return employee;
         } else if (type.name().equals("SALARY")) {
-            employee = new SalaryEmployee(name, id, type, payRate, ytdEarnings, ytdTaxesPaid, pretaxDeductions);
+            SalaryEmployee employee = new SalaryEmployee(name, id, payRate, ytdEarnings, ytdTaxesPaid, pretaxDeductions);
+            employee.setType(type);
+            return employee;
         }
-
-        return employee;
+        return null;
     }
 
 

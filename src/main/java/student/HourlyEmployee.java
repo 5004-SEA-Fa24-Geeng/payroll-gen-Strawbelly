@@ -41,10 +41,9 @@ public class HourlyEmployee extends EmployeeGrossPay implements IEmployee {
      * @param ytdTaxesPaid the ytd taxes paid of the hourly employee
      * @param pretaxDeductions the pre-tax deductions of the hourly employee
      */
-    public HourlyEmployee(String name, String id, EmployeeType type, double payRate, double ytdEarnings, double ytdTaxesPaid, double pretaxDeductions) {
+    public HourlyEmployee(String name, String id, double payRate, double ytdEarnings, double ytdTaxesPaid, double pretaxDeductions) {
         this.name = name;
         this.id = id;
-        this.type = type;
         this.payRate = payRate;
         this.ytdEarnings = ytdEarnings;
         this.ytdTaxesPaid = ytdTaxesPaid;
