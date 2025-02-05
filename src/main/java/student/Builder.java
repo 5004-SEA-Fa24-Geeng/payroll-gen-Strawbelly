@@ -1,6 +1,9 @@
 package student;
 
-/** 
+import java.util.Enumeration;
+import java.util.List;
+
+/**
  * This is a static class (essentially functions) that will help you build objects from CSV strings.
  * These objects are then used in the rest of the program. Often these builders are associated
  * with the objects themselves and the concept of a factory, but we placed
@@ -23,7 +26,24 @@ public final class Builder {
      */
     public static IEmployee buildEmployeeFromCSV(String csv) {
 
-        return null;
+        String[] em = csv.split(",");
+        EmployeeType type = EmployeeType.valueOf(em[0]);
+        String name = em[1];
+        String id = em[2];
+        double payRate = Double.parseDouble(em[3]);
+        double pretaxDeductions = Double.parseDouble(em[4]);
+        double ytdEarnings = Double.parseDouble(em[5]);
+        double ytdTaxesPaid = Double.parseDouble(em[6]);
+
+        IEmployee employee = null;
+
+        if (type.name().equals("HOURLY")) {
+            employee = new HourlyEmployee(name, id, type, payRate, ytdEarnings, ytdTaxesPaid, pretaxDeductions);
+        } else if (type.name().equals("SALARY")) {
+            employee = new SalaryEmployee(name, id, type, payRate, ytdEarnings, ytdTaxesPaid, pretaxDeductions);
+        }
+
+        return employee;
     }
 
 
@@ -35,7 +55,9 @@ public final class Builder {
      * @return a TimeCard object
      */
     public static ITimeCard buildTimeCardFromCSV(String csv) {
-    
-        return null;
+        String[] tc = csv.split(",");
+        String id = tc[0];
+        double hours = Double.parseDouble(tc[1]);
+        return new TimeCard(id, hours);
     }
 }

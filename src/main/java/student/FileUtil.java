@@ -52,7 +52,7 @@ public final class FileUtil {
 
 
     /**
-     * Writes the lines to the file. Will backup teh file if it exists.
+     * Writes the lines to the file. Will backup the file if it exists.
      * 
      * @param outFile the file name
      * @param lines the lines to write

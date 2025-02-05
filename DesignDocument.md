@@ -8,7 +8,7 @@ This document is meant to provide a tool for you to demonstrate the design proce
 
 Place your class diagram below. Make sure you check the fil in the browser on github.com to make sure it is rendering correctly. If it is not, you will need to fix it. As a reminder, here is a link to tools that can help you create a class diagram: [Class Resources: Class Design Tools](https://github.com/CS5004-khoury-lionelle/Resources?tab=readme-ov-file#uml-design-tools)
 
-
+![class diagram](src/class diagram.png)
 
 
 
