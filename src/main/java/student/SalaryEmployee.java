@@ -185,11 +185,11 @@ public class SalaryEmployee extends EmployeeGrossPay implements IEmployee {
         BigDecimal taxesBD = payAfterDeductions.multiply(TAX_RATE);
         BigDecimal netPayBD = payAfterDeductions.subtract(taxesBD);
 
-        ytdEarnings = netPayBD.add(BigDecimal.valueOf(ytdEarnings)).setScale(2, RoundingMode.HALF_UP).doubleValue();
-        ytdTaxesPaid = taxesBD.add(BigDecimal.valueOf(ytdTaxesPaid)).setScale(2, RoundingMode.HALF_UP).doubleValue();
+        ytdEarnings = netPayBD.add(BigDecimal.valueOf(ytdEarnings)).setScale(2, RoundingMode.UP).doubleValue();
+        ytdTaxesPaid = taxesBD.add(BigDecimal.valueOf(ytdTaxesPaid)).setScale(2, RoundingMode.UP).doubleValue();
 
-        double taxes = taxesBD.setScale(2, RoundingMode.HALF_UP).doubleValue();
-        double netPay = netPayBD.setScale(2, RoundingMode.HALF_UP).doubleValue();
+        double taxes = taxesBD.setScale(2, RoundingMode.UP).doubleValue();
+        double netPay = netPayBD.setScale(2, RoundingMode.UP).doubleValue();
 
         return new PayStub(name, netPay, taxes, ytdEarnings, ytdTaxesPaid);
     }
