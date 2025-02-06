@@ -187,8 +187,8 @@ public class HourlyEmployee extends Employee implements IEmployee {
 
         ytdEarnings = BigDecimal.valueOf(ytdEarnings).add(netPayBD).setScale(2, RoundingMode.HALF_UP).doubleValue();
         ytdTaxesPaid = BigDecimal.valueOf(ytdTaxesPaid).add(taxesBD).setScale(2, RoundingMode.HALF_UP).doubleValue();
-        this.setYtdEarnings(ytdEarnings);
-        this.setYtdTaxesPaid(ytdTaxesPaid);
+        //this.setYtdEarnings(ytdEarnings);
+        //this.setYtdTaxesPaid(ytdTaxesPaid);
 
         double taxes = taxesBD.setScale(2, RoundingMode.HALF_UP).doubleValue();
         double netPay = netPayBD.setScale(2, RoundingMode.HALF_UP).doubleValue();

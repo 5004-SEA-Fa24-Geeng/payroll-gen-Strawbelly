@@ -26,6 +26,8 @@ class SalaryEmployeeTest {
     void runPayroll() {
         PayStub test = new PayStub("Edward Elric", 3029.54, 887.13,14029.54,3220.13);
         assertEquals(test.toCSV(), e.runPayroll(40).toCSV());
+        System.out.println(e.getYTDEarnings());
+        System.out.println(e.getYTDTaxesPaid());
 
     }
 

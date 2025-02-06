@@ -92,6 +92,7 @@ public final class PayrollGenerator {
 
          employeeLines = employees.stream().map(IEmployee::toCSV).collect(Collectors.toList());
          employeeLines.add(0, FileUtil.EMPLOYEE_HEADER);
+         System.out.println(employeeLines);
          FileUtil.writeFile(arguments.getEmployeeFile(), employeeLines);
  
          // now save out the pay stubs
