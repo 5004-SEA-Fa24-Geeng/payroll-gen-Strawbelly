@@ -59,4 +59,15 @@ public class PayStub implements IPayStub {
     public String toCSV() {
         return name + "," + netPay + "," + taxes + "," + ytdEarnings + "," + ytdTaxesPaid;
     }
+
+    /**
+     * Converts the PayStub object to a string.
+     * @return the PayStub object as a string.
+     */
+    @Override
+    public String toString() {
+        return String.format("{name: %s, netPay: %.2f, taxes: %.2f, " +
+                "ytdEarnings: %.2f, ytdTaxesPaid: %.2f}",
+                name, netPay, taxes, ytdEarnings, ytdTaxesPaid);
+    }
 }

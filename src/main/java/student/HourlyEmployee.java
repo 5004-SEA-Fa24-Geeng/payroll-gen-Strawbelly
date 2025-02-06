@@ -5,26 +5,8 @@ import java.math.RoundingMode;
 
 public class HourlyEmployee extends Employee implements IEmployee {
 
-    /** holds the name.*/
-    private String name;
-
-    /** holds the id.*/
-    private String id;
-
-    /** holds the name.*/
+    /** holds the type.*/
     private EmployeeType type = EmployeeType.HOURLY;
-
-    /** holds the pay rate.*/
-    private double payRate;
-
-    /** holds the ytd earnings.*/
-    private double ytdEarnings;
-
-    /** holds the ytd taxes paid.*/
-    private double ytdTaxesPaid;
-
-    /** holds the pre-tax deductions.*/
-    private double pretaxDeductions;
 
     /** holds the basic 40 work hours.*/
     private static final int WORK_HOURS = 40;
@@ -43,131 +25,23 @@ public class HourlyEmployee extends Employee implements IEmployee {
      */
     public HourlyEmployee(String name, String id, double payRate, double ytdEarnings,
                           double ytdTaxesPaid, double pretaxDeductions) {
-        this.name = name;
-        this.id = id;
-        this.payRate = payRate;
-        this.ytdEarnings = ytdEarnings;
-        this.ytdTaxesPaid = ytdTaxesPaid;
-        this.pretaxDeductions = pretaxDeductions;
-    }
-
-    /**
-     * Return the name.
-     * @return the name
-     */
-    @Override
-    public String getName() {
-        return name;
-    }
-
-    /**
-     * Return the id.
-     * @return the id
-     */
-    @Override
-    public String getID() {
-        return id;
-    }
-
-    /**
-     * Return the pay rate.
-     * @return the pay rate
-     */
-    @Override
-    public double getPayRate() {
-        return payRate;
+        super(name, id, payRate, ytdEarnings, ytdTaxesPaid, pretaxDeductions);
     }
 
     /**
      * Return the string representation of the employee type.
      * @return the string representation of the employee type
      */
-    @Override
     public String getEmployeeType() {
-        return type.name();
+        return this.type.name();
     }
 
     /**
-     * Return the ytd earnings.
-     * @return the ytd earnings
-     */
-    @Override
-    public double getYTDEarnings() {
-        return ytdEarnings;
-    }
-
-    /**
-     * Return the ytd taxes paid.
-     * @return the ytd taxes paid
-     */
-    @Override
-    public double getYTDTaxesPaid() {
-        return ytdTaxesPaid;
-    }
-
-    /**
-     * Return the pre-tax deductions.
-     * @return the pre-tax deductions
-     */
-    @Override
-    public double getPretaxDeductions() {
-        return pretaxDeductions;
-    }
-
-    /**
-     * Set the name of the hourly employee.
-     * @param name the name of the hourly employee
-     */
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    /**
-     * Set the id of the hourly employee.
-     * @param id the id of the hourly employee
-     */
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    /**
-     * Set the type of the hourly employee.
-     * @param type the type of the hourly employee.
+     * Set the type of the employee.
+     * @param type the type of the employee.
      */
     public void setType(EmployeeType type) {
         this.type = type;
-    }
-
-    /**
-     * Set the pay rate of the hourly employee.
-     * @param payRate the pay rate of the hourly employee.
-     */
-    public void setPayRate(double payRate) {
-        this.payRate = payRate;
-    }
-
-    /**
-     * Set the ytd earnings of the hourly employee.
-     * @param ytdEarnings the ytd earnings of the hourly employee
-     */
-    public void setYtdEarnings(double ytdEarnings) {
-        this.ytdEarnings = ytdEarnings;
-    }
-
-    /**
-     * Set the ytd taxes paid of the hourly employee.
-     * @param ytdTaxesPaid the ytd taxes paid of the hourly employee.
-     */
-    public void setYtdTaxesPaid(double ytdTaxesPaid) {
-        this.ytdTaxesPaid = ytdTaxesPaid;
-    }
-
-    /**
-     * Set the pre-tax deductions of the hourly employee.
-     * @param pretaxDeductions the pre-tax deductions of the hourly employee
-     */
-    public void setPretaxDeductions(double pretaxDeductions) {
-        this.pretaxDeductions = pretaxDeductions;
     }
 
     /**
@@ -181,19 +55,17 @@ public class HourlyEmployee extends Employee implements IEmployee {
             return null;
         }
         BigDecimal grossPay = calculateGrossPay(hoursWorked);
-        BigDecimal payAfterDeductions = grossPay.subtract(BigDecimal.valueOf(pretaxDeductions));
+        BigDecimal payAfterDeductions = grossPay.subtract(BigDecimal.valueOf(getPretaxDeductions()));
         BigDecimal taxesBD = payAfterDeductions.multiply(TAX_RATE);
         BigDecimal netPayBD = payAfterDeductions.subtract(taxesBD);
 
-        ytdEarnings = BigDecimal.valueOf(ytdEarnings).add(netPayBD).setScale(2, RoundingMode.HALF_UP).doubleValue();
-        ytdTaxesPaid = BigDecimal.valueOf(ytdTaxesPaid).add(taxesBD).setScale(2, RoundingMode.HALF_UP).doubleValue();
-        //this.setYtdEarnings(ytdEarnings);
-        //this.setYtdTaxesPaid(ytdTaxesPaid);
+        setYtdEarnings(BigDecimal.valueOf(getYTDEarnings()).add(netPayBD).setScale(2, RoundingMode.HALF_UP).doubleValue());
+        setYtdTaxesPaid(BigDecimal.valueOf(getYTDTaxesPaid()).add(taxesBD).setScale(2, RoundingMode.HALF_UP).doubleValue());
 
         double taxes = taxesBD.setScale(2, RoundingMode.HALF_UP).doubleValue();
         double netPay = netPayBD.setScale(2, RoundingMode.HALF_UP).doubleValue();
 
-        return new PayStub(name, netPay, taxes, ytdEarnings, ytdTaxesPaid);
+        return new PayStub(getName(), netPay, taxes, getYTDEarnings(), getYTDTaxesPaid());
     }
 
     /**
@@ -202,8 +74,9 @@ public class HourlyEmployee extends Employee implements IEmployee {
      */
     @Override
     public String toCSV() {
-        return getEmployeeType() + "," + name + "," + id + "," + payRate + ","
-                + pretaxDeductions + "," + ytdEarnings + "," + ytdTaxesPaid;
+        return String.format("%s,%s,%s,%.2f,%.2f,%.2f,%.2f",
+                getEmployeeType(), getName(), getID(), getPayRate(), getPretaxDeductions(),
+                getYTDEarnings(), getYTDTaxesPaid());
     }
 
     /**
@@ -213,15 +86,27 @@ public class HourlyEmployee extends Employee implements IEmployee {
      */
     @Override
     protected BigDecimal calculateGrossPay(double hoursWorked) {
-        BigDecimal payRateBD = BigDecimal.valueOf(payRate);
+        BigDecimal payRateBD = BigDecimal.valueOf(getPayRate());
         BigDecimal hoursWorkedBD = BigDecimal.valueOf(hoursWorked);
         if (hoursWorked <= WORK_HOURS) {
-            return payRateBD.multiply(hoursWorkedBD);
+            return payRateBD.multiply(hoursWorkedBD).setScale(2, RoundingMode.HALF_UP);
         } else {
             BigDecimal basePay = payRateBD.multiply(BigDecimal.valueOf(WORK_HOURS));
             BigDecimal overtimePay = payRateBD.multiply(BigDecimal.valueOf(1.5))
                     .multiply(BigDecimal.valueOf(hoursWorked - WORK_HOURS));
-            return basePay.add(overtimePay);
+            return basePay.add(overtimePay).setScale(2, RoundingMode.HALF_UP);
         }
+    }
+
+    /**
+     * Convert a SalaryEmployee object to a String.
+     * @return the SalaryEmployee abject as a string
+     */
+    @Override
+    public String toString() {
+        return String.format("{name: %s, id: %s, type: %s, payRate: %.2f, " +
+                        "ytdEarnings: %.2f, ytdTaxesPaid: %.2f, pretaxDeductions: %.2f}",
+                getName(), getID(), getEmployeeType(), getPayRate(),
+                getYTDEarnings(), getYTDTaxesPaid(), getPretaxDeductions());
     }
 }

@@ -1,5 +1,7 @@
 package student;
 
+import javax.xml.namespace.QName;
+
 public class TimeCard implements ITimeCard {
 
     /** holds the id.*/
@@ -34,5 +36,14 @@ public class TimeCard implements ITimeCard {
     @Override
     public double getHoursWorked() {
         return hours;
+    }
+
+    /**
+     * Convert a TimeCard object to a String
+     * @return a TimeCard object as a String
+     */
+    @Override
+    public String toString() {
+        return String.format("{id: %s, hours: %.2f}", id, hours);
     }
 }
