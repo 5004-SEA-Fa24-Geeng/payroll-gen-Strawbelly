@@ -3,7 +3,6 @@ package student;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-
 public class SalaryEmployee extends Employee implements IEmployee {
 
     /** holds the type.*/
