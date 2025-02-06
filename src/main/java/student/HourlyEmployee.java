@@ -185,8 +185,8 @@ public class HourlyEmployee extends EmployeeGrossPay implements IEmployee {
         BigDecimal taxesBD = payAfterDeductions.multiply(TAX_RATE);
         BigDecimal netPayBD = payAfterDeductions.subtract(taxesBD);
 
-        ytdEarnings = netPayBD.add(BigDecimal.valueOf(ytdEarnings)).setScale(2, RoundingMode.HALF_UP).doubleValue();
-        ytdTaxesPaid = taxesBD.add(BigDecimal.valueOf(ytdTaxesPaid)).setScale(2, RoundingMode.HALF_UP).doubleValue();
+        ytdEarnings = BigDecimal.valueOf(ytdEarnings).add(netPayBD).setScale(2, RoundingMode.HALF_UP).doubleValue();
+        ytdTaxesPaid = BigDecimal.valueOf(ytdTaxesPaid).add(taxesBD).setScale(2, RoundingMode.HALF_UP).doubleValue();
 
         double taxes = taxesBD.setScale(2, RoundingMode.HALF_UP).doubleValue();
         double netPay = netPayBD.setScale(2, RoundingMode.HALF_UP).doubleValue();
