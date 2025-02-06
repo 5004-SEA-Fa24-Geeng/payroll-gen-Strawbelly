@@ -3,7 +3,7 @@ package student;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-public class SalaryEmployee extends EmployeeGrossPay implements IEmployee {
+public class SalaryEmployee extends Employee implements IEmployee {
 
     /** holds the name.*/
     private String name;
@@ -187,7 +187,8 @@ public class SalaryEmployee extends EmployeeGrossPay implements IEmployee {
 
         ytdEarnings = BigDecimal.valueOf(ytdEarnings).add(netPayBD).setScale(2, RoundingMode.HALF_UP).doubleValue();
         ytdTaxesPaid = BigDecimal.valueOf(ytdTaxesPaid).add(taxesBD).setScale(2, RoundingMode.HALF_UP).doubleValue();
-
+        this.setYtdEarnings(ytdEarnings);
+        this.setYtdTaxesPaid(ytdTaxesPaid);
         double taxes = taxesBD.setScale(2, RoundingMode.HALF_UP).doubleValue();
         double netPay = netPayBD.setScale(2, RoundingMode.HALF_UP).doubleValue();
 
