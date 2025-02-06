@@ -66,8 +66,8 @@ public class PayStub implements IPayStub {
      */
     @Override
     public String toString() {
-        return String.format("{name: %s, netPay: %.2f, taxes: %.2f, " +
-                "ytdEarnings: %.2f, ytdTaxesPaid: %.2f}",
+        return String.format("{name: %s, netPay: %.2f, taxes: %.2f, "
+                        + "ytdEarnings: %.2f, ytdTaxesPaid: %.2f}",
                 name, netPay, taxes, ytdEarnings, ytdTaxesPaid);
     }
 }

@@ -1,6 +1,5 @@
 package student;
 
-import javax.xml.namespace.QName;
 
 public class TimeCard implements ITimeCard {
 
@@ -39,7 +38,7 @@ public class TimeCard implements ITimeCard {
     }
 
     /**
-     * Convert a TimeCard object to a String
+     * Convert a TimeCard object to a String.
      * @return a TimeCard object as a String
      */
     @Override

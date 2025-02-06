@@ -3,6 +3,7 @@ package student;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
+
 public class SalaryEmployee extends Employee implements IEmployee {
 
     /** holds the type.*/
@@ -59,8 +60,10 @@ public class SalaryEmployee extends Employee implements IEmployee {
         BigDecimal taxesBD = payAfterDeductions.multiply(TAX_RATE);
         BigDecimal netPayBD = payAfterDeductions.subtract(taxesBD);
 
-        setYtdEarnings(BigDecimal.valueOf(getYTDEarnings()).add(netPayBD).setScale(2, RoundingMode.HALF_UP).doubleValue());
-        setYtdTaxesPaid(BigDecimal.valueOf(getYTDTaxesPaid()).add(taxesBD).setScale(2, RoundingMode.HALF_UP).doubleValue());
+        setYtdEarnings(BigDecimal.valueOf(getYTDEarnings()).add(netPayBD)
+                .setScale(2, RoundingMode.HALF_UP).doubleValue());
+        setYtdTaxesPaid(BigDecimal.valueOf(getYTDTaxesPaid()).add(taxesBD)
+                .setScale(2, RoundingMode.HALF_UP).doubleValue());
 
         double taxes = taxesBD.setScale(2, RoundingMode.HALF_UP).doubleValue();
         double netPay = netPayBD.setScale(2, RoundingMode.HALF_UP).doubleValue();
@@ -96,8 +99,8 @@ public class SalaryEmployee extends Employee implements IEmployee {
      */
     @Override
     public String toString() {
-        return String.format("{name: %s, id: %s, type: %s, payRate: %.2f, " +
-                        "ytdEarnings: %.2f, ytdTaxesPaid: %.2f, pretaxDeductions: %.2f}",
+        return String.format("{name: %s, id: %s, type: %s, payRate: %.2f, "
+                        + "ytdEarnings: %.2f, ytdTaxesPaid: %.2f, pretaxDeductions: %.2f}",
                 getName(), getID(), getEmployeeType(), getPayRate(),
                 getYTDEarnings(), getYTDTaxesPaid(), getPretaxDeductions());
     }
