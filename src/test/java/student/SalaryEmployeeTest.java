@@ -95,10 +95,16 @@ class SalaryEmployeeTest {
 
     @Test
     void runPayroll() {
+
+        // test case: -9 work hour
+        assertEquals(null, e.runPayroll(-9));
+
+        // test case: 0 work hour
+        assertEquals("Edward Elric,0.0,0.0,11000.0,2333.0", e.runPayroll(0).toCSV());
+
+        // test case: 45 work hours
         PayStub test = new PayStub("Edward Elric", 3029.54, 887.13,14029.54,3220.13);
         assertEquals(test.toCSV(), e.runPayroll(40).toCSV());
-        System.out.println(e.getYTDEarnings());
-        System.out.println(e.getYTDTaxesPaid());
     }
 
     @Test

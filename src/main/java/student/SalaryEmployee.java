@@ -55,19 +55,22 @@ public class SalaryEmployee extends Employee implements IEmployee {
             return null;
         }
         BigDecimal grossPay = calculateGrossPay(hoursWorked);
-        BigDecimal payAfterDeductions = grossPay.subtract(BigDecimal.valueOf(getPretaxDeductions()));
-        BigDecimal taxesBD = payAfterDeductions.multiply(TAX_RATE);
-        BigDecimal netPayBD = payAfterDeductions.subtract(taxesBD);
+        if (!grossPay.equals(BigDecimal.ZERO)) {
+            BigDecimal payAfterDeductions = grossPay.subtract(BigDecimal.valueOf(getPretaxDeductions()));
+            BigDecimal taxesBD = payAfterDeductions.multiply(TAX_RATE);
+            BigDecimal netPayBD = payAfterDeductions.subtract(taxesBD);
 
-        setYtdEarnings(BigDecimal.valueOf(getYTDEarnings()).add(netPayBD)
-                .setScale(2, RoundingMode.HALF_UP).doubleValue());
-        setYtdTaxesPaid(BigDecimal.valueOf(getYTDTaxesPaid()).add(taxesBD)
-                .setScale(2, RoundingMode.HALF_UP).doubleValue());
+            setYtdEarnings(BigDecimal.valueOf(getYTDEarnings()).add(netPayBD)
+                    .setScale(2, RoundingMode.HALF_UP).doubleValue());
+            setYtdTaxesPaid(BigDecimal.valueOf(getYTDTaxesPaid()).add(taxesBD)
+                    .setScale(2, RoundingMode.HALF_UP).doubleValue());
 
-        double taxes = taxesBD.setScale(2, RoundingMode.HALF_UP).doubleValue();
-        double netPay = netPayBD.setScale(2, RoundingMode.HALF_UP).doubleValue();
+            double taxes = taxesBD.setScale(2, RoundingMode.HALF_UP).doubleValue();
+            double netPay = netPayBD.setScale(2, RoundingMode.HALF_UP).doubleValue();
 
-        return new PayStub(getName(), netPay, taxes, getYTDEarnings(), getYTDTaxesPaid());
+            return new PayStub(getName(), netPay, taxes, getYTDEarnings(), getYTDTaxesPaid());
+        }
+        return new PayStub(getName(), 0, 0, getYTDEarnings(), getYTDTaxesPaid());
     }
 
     /**
@@ -88,6 +91,7 @@ public class SalaryEmployee extends Employee implements IEmployee {
      */
     @Override
     protected BigDecimal calculateGrossPay(double hoursWorked) {
+        if (hoursWorked == 0) return BigDecimal.ZERO;
         BigDecimal payRateBD = BigDecimal.valueOf(getPayRate());
         return payRateBD.divide(BigDecimal.valueOf(TIMES), 2, RoundingMode.HALF_UP);
     }

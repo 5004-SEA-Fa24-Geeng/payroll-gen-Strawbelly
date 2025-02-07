@@ -96,8 +96,17 @@ class HourlyEmployeeTest {
 
     @Test
     void runPayroll() {
+
+        // test case: -9 work hour
+        assertEquals(null, e.runPayroll(-9));
+
+        // test case: 0 work hour
+        assertEquals("Luffy,0.0,0.0,20000.0,4530.0", e.runPayroll(0).toCSV());
+
+        // test case: 45 work hours
         PayStub test = new PayStub("Luffy", 1102.24, 322.76,21102.24,4852.76);
         assertEquals(test.toCSV(), e.runPayroll(45).toCSV());
+
     }
 
     @Test
