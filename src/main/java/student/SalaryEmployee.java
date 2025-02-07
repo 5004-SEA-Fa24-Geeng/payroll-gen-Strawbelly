@@ -69,8 +69,9 @@ public class SalaryEmployee extends Employee implements IEmployee {
             double netPay = netPayBD.setScale(2, RoundingMode.HALF_UP).doubleValue();
 
             return new PayStub(getName(), netPay, taxes, getYTDEarnings(), getYTDTaxesPaid());
+        } else {
+            return new PayStub(getName(), 0, 0, getYTDEarnings(), getYTDTaxesPaid());
         }
-        return new PayStub(getName(), 0, 0, getYTDEarnings(), getYTDTaxesPaid());
     }
 
     /**
