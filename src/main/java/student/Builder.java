@@ -49,7 +49,7 @@ public final class Builder {
                         ytdTaxesPaid, pretaxDeductions);
             }
 
-        } catch(NumberFormatException e) {
+        } catch (NumberFormatException e) {
             throw new NullPointerException("Invalid number format: " + e.getMessage());
         }
 
