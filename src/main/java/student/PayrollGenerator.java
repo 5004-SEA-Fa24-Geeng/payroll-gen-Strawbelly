@@ -76,7 +76,7 @@ public final class PayrollGenerator {
             if (hours < 0) {
                 continue;
             }
-            if (hours == 0) {
+            if (hours == 0 && employee.getEmployeeType().equals("HOURLY")) {
                 IPayStub payStub = new PayStub(employee.getName(), 0, 0,
                         employee.getYTDEarnings(), employee.getYTDTaxesPaid());
                 payStubs.add(payStub);
