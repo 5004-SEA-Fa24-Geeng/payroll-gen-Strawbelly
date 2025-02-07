@@ -3,7 +3,7 @@ package student;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-public class HourlyEmployee extends Employee implements IEmployee {
+public class HourlyEmployee extends Employee {
 
     /** holds the type.*/
     private EmployeeType type = EmployeeType.HOURLY;
@@ -71,17 +71,6 @@ public class HourlyEmployee extends Employee implements IEmployee {
     }
 
     /**
-     * Converts the employee to a CSV string.
-     * @return the employee as a string
-     */
-    @Override
-    public String toCSV() {
-        return String.format("%s,%s,%s,%.2f,%.2f,%.2f,%.2f",
-                getEmployeeType(), getName(), getID(), getPayRate(), getPretaxDeductions(),
-                getYTDEarnings(), getYTDTaxesPaid());
-    }
-
-    /**
      * Calculate the gross pay for the hourly employee.
      * @param hoursWorked the work hours of the hourly employee
      * @return the gross pay as a BigDecimal
@@ -98,6 +87,17 @@ public class HourlyEmployee extends Employee implements IEmployee {
                     .multiply(BigDecimal.valueOf(hoursWorked - WORK_HOURS));
             return basePay.add(overtimePay).setScale(2, RoundingMode.HALF_UP);
         }
+    }
+
+    /**
+     * Converts the employee to a CSV string.
+     * @return the employee as a string
+     */
+    @Override
+    public String toCSV() {
+        return String.format("%s,%s,%s,%.2f,%.2f,%.2f,%.2f",
+                getEmployeeType(), getName(), getID(), getPayRate(), getPretaxDeductions(),
+                getYTDEarnings(), getYTDTaxesPaid());
     }
 
     /**

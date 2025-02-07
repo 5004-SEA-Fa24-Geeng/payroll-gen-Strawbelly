@@ -8,7 +8,7 @@ This document is meant to provide a tool for you to demonstrate the design proce
 
 Place your class diagram below. Make sure you check the fil in the browser on github.com to make sure it is rendering correctly. If it is not, you will need to fix it. As a reminder, here is a link to tools that can help you create a class diagram: [Class Resources: Class Design Tools](https://github.com/CS5004-khoury-lionelle/Resources?tab=readme-ov-file#uml-design-tools)
 
-![class diagram](src/class diagram.png)
+![class diagram](resources/images/initial_design.png)
 
 
 
@@ -26,10 +26,21 @@ Write a test (in english) that you can picture for the class diagram you have cr
 
 You should feel free to number your brainstorm. 
 
-1. Test that the `Employee` class properly returns `name` from `getName()`
-2. Test that the `Employee` class properly returns `id` from `getId()`
-3. continue to add your brainstorm here (you don't need to super formal - this is a brainstorm) - yes, you can change the bullets above to something that fits your design.
-
+1. Test that the `HourlyEmployee` and `SalaryEmployee` class properly returns `name` from `getName()`
+2. Test that the `HourlyEmployee` and `SalaryEmployee` class properly returns `id` from `getId()`
+3. Test that the `HourlyEmployee` and `SalaryEmployee` class properly returns `type` from `getEmployeeType()`
+4. Test that the `HourlyEmployee` and `SalaryEmployee` class properly returns `payRate` from `getPayRate()`
+5. Test that the `HourlyEmployee` and `SalaryEmployee` class properly returns `ytdEearnings` from `getYTDEarnings()`
+6. Test that the `HourlyEmployee` and `SalaryEmployee` class properly returns `ytdTaxesPaid` from `getYTDTaxesPaid()`
+7. Test that the `HourlyEmployee` and `SalaryEmployee` class properly returns `preTaxDeductions` from `getPretaxDeductions()`
+8. Test that the `HourlyEmployee` and `SalaryEmployee` class properly returns `IPayStub` from `runPayroll()`
+9. Test that the `HourlyEmployee` and `SalaryEmployee` class properly returns `String` from `toCSV()`
+10. Test that the `PayStub` class properly returns `netPay` from `getPay()`
+11. Test that the `PayStub` class properly returns `taxes` from `getTaxesPaid()`
+12. Test that the `TimeCard` class properly returns `id` from `getEmployeeID()`
+13. Test that the `TimeCard` class properly returns `hours` from `getHoursWorked()`
+14. Test that the `Builder` class properly returns `IEmployee` from `buildEmployeeFromCSV()`
+15. Test that the `Builder` class properly returns `ITimeCard` from `buildTimeCardFromCSV()`
 
 
 ## (FINAL DESIGN): Class Diagram
@@ -39,7 +50,7 @@ Go through your completed code, and update your class diagram to reflect the fin
 > [!WARNING]
 > If you resubmit your assignment for manual grading, this is a section that often needs updating. You should double check with every resubmit to make sure it is up to date.
 
-
+![class diagram](resources/images/final_design.png)
 
 
 
@@ -49,3 +60,7 @@ Go through your completed code, and update your class diagram to reflect the fin
 > The value of reflective writing has been highly researched and documented within computer science, from learning new information to showing higher salaries in the workplace. For this next part, we encourage you to take time, and truly focus on your retrospective.
 
 Take time to reflect on how your design has changed. Write in *prose* (i.e. do not bullet point your answers - it matters in how our brain processes the information). Make sure to include what were some major changes, and why you made them. What did you learn from this process? What would you do differently next time? What was the most challenging part of this process? For most students, it will be a paragraph or two. 
+
+In the initial design, I only wrote an abstract method which is used to calculate the gross pay in the abstract EmployeeGrossPay class. Then I let the HourlyEmployee Class and SalaryEmployee Class to extend this abstract class and implement the calculateGrossPay method. Then in the development, I gradually realized that I wrote too much codes with the same logic, which could be encapsulated in the abstract class. So I changed the inheritance and implementation structure. I renamed the abstract class to Employee and made it implement the IEmployee interface. Then I let the HourlyEmployee Class and SalaryEmployee Class to extend the Employee class. 
+
+I learned that I should always encapsulate code with the same or similar logic. And next time, I will think deeper about the structure of the program, and write enough test cases (including corner cases) before writing the functions code. The most challenging part is debugging my code. Although I believed the code logic is correct, a small syntax error could break the whole program, leading to fatal issues and unwanted results. 

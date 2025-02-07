@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 /**
  * An abstract class which is used to calculate the gross pay for employees.
  */
-public abstract class Employee {
+public abstract class Employee implements IEmployee {
 
     /** holds the name.*/
     private String name;

@@ -24,27 +24,37 @@ public final class Builder {
     public static IEmployee buildEmployeeFromCSV(String csv) {
 
         String[] em = csv.split(",");
+
+        if (em.length != 7) {
+            throw new IllegalArgumentException("The csv string is illegal.");
+        }
+
         String type = em[0];
         String name = em[1];
         String id = em[2];
-        double payRate = Double.parseDouble(em[3]);
-        double pretaxDeductions = Double.parseDouble(em[4]);
-        double ytdEarnings = Double.parseDouble(em[5]);
-        double ytdTaxesPaid = Double.parseDouble(em[6]);
 
         IEmployee employee = null;
 
-        if (type.equals("HOURLY")) {
-            employee = new HourlyEmployee(name, id, payRate, ytdEarnings,
-                    ytdTaxesPaid, pretaxDeductions);
-        } else if (type.equals("SALARY")) {
-            employee = new SalaryEmployee(name, id, payRate, ytdEarnings,
-                    ytdTaxesPaid, pretaxDeductions);
+        try {
+            double payRate = Double.parseDouble(em[3]);
+            double pretaxDeductions = Double.parseDouble(em[4]);
+            double ytdEarnings = Double.parseDouble(em[5]);
+            double ytdTaxesPaid = Double.parseDouble(em[6]);
+
+            if (type.equals("HOURLY")) {
+                employee = new HourlyEmployee(name, id, payRate, ytdEarnings,
+                        ytdTaxesPaid, pretaxDeductions);
+            } else if (type.equals("SALARY")) {
+                employee = new SalaryEmployee(name, id, payRate, ytdEarnings,
+                        ytdTaxesPaid, pretaxDeductions);
+            }
+
+        } catch(NumberFormatException e) {
+            throw new NullPointerException("Invalid number format: " + e.getMessage());
         }
 
         return employee;
     }
-
 
 
    /**
@@ -56,7 +66,11 @@ public final class Builder {
     public static ITimeCard buildTimeCardFromCSV(String csv) {
         String[] tc = csv.split(",");
         String id = tc[0];
-        double hours = Double.parseDouble(tc[1]);
-        return new TimeCard(id, hours);
+        try {
+            double hours = Double.parseDouble(tc[1]);
+            return new TimeCard(id, hours);
+        } catch (NumberFormatException e) {
+            throw new NullPointerException("Invalid number format: " + e.getMessage());
+        }
     }
 }
