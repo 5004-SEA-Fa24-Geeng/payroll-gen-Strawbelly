@@ -91,7 +91,9 @@ public class SalaryEmployee extends Employee implements IEmployee {
      */
     @Override
     protected BigDecimal calculateGrossPay(double hoursWorked) {
-        if (hoursWorked == 0) return BigDecimal.ZERO;
+        if (hoursWorked == 0) {
+            return BigDecimal.ZERO;
+        }
         BigDecimal payRateBD = BigDecimal.valueOf(getPayRate());
         return payRateBD.divide(BigDecimal.valueOf(TIMES), 2, RoundingMode.HALF_UP);
     }
