@@ -63,10 +63,10 @@ Think through the issue / making sure to cite any resources you use to help you 
 
 The answer to this is mostly open. We ask that you cite at least two sources to show your understanding of the issue. The TAs will also give feedback on your answer, though will be liberal in grading as long as you show a good faith effort to understand the issue and making an effort to think about how your design to could help meet your employer's goals of salary equity. 
 
-* To ensure paying employees more fairly, one important thing is to add additional data points in the employee file. Considering gender and race/ethnicity wage discrimination is widespread, we should include additional employee information such as gender, race/ethnicity, and job level to the employee file. These data could help identify wage discrepancies and allow us to remedy them once found.
+* To ensure paying employees more fairly, one important thing is to add additional data points in the employee file. Considering gender and race/ethnicity wage discrimination is widespread[^1] , we should include additional employee information such as gender, race/ethnicity, and job level to the employee file. These data could help identify wage discrepancies and allow us to remedy them once found.
 When calculating the gross pay, it’s crucial to use the same calculation logic for every employee in the same job level. Gender or race/ethnicity should not influence the base salary calculation, otherwise, it may lead to unfair wage disparities.
 
-* Another important thing is to include pretax benefits in the calculation, such as health insurance and relocation assistance. Different employees could have different pretax benefits, which could lead to huge disparities in total wages. Therefore, after calculating the basic pay, we should add the total prefix benefits to get the full wages. And we should always ensure that employees in the same job level receive the same types of pretax benefits.
+* Another important thing is to include pretax benefits in the calculation[^2] , such as health insurance and relocation assistance. Different employees could have different pretax benefits, which could lead to huge disparities in total wages. Therefore, after calculating the basic pay, we should add the total prefix benefits to get the full wages. And we should always ensure that employees in the same job level receive the same types of pretax benefits.
 
 [^1]: https://hbr.org/2022/12/what-it-takes-to-be-a-fair-pay-workplace. Accessed: 2025-02-07.
 
